@@ -1,13 +1,13 @@
 'use strict';
 const catModel = require('../models/catModel');
-const cats = catModel.cats;
 
-const getCats = (req, res) => {
+const getCats = async(req, res) => {
+    const cats = await catModel.getAllCats();
     res.json(cats)
 }
 
-const getCat = (req,res) =>{
-    const cat = cats.filter(cat => req.params.catId == cat.id)[0];
+const getCat = async (req,res) =>{
+    const cat = catModel.getCatById(req.params.catId)
     if(cat){
         res.json(cat);
 
@@ -18,7 +18,8 @@ const getCat = (req,res) =>{
   
 const modifyCat = (req,res) => {}
 const createCat = (req,res) => {
-    res.send('From this endpoint you can add more cats')
+    console.log(req.body);
+    res.send('adding cat')
 };
 const deleteCat = (req,res) => {}
 
