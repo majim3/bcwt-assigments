@@ -19,5 +19,5 @@ const cats = [
 ];
 
 module.exports = {
-  cats,
+  cats, 
 };

@@ -1,17 +1,15 @@
 'use strict';
-// catRoute
+// userRoute
 const express = require('express');
 const router = express.Router();
-const catController = require('../controllers/catController');
+const userController = require('../controllers/userController')
 
-router.get('/', catController.getCats);
 
-router.get('/:catId', catController.getCat);
+router.get('/', userController.getUsers);
 
-    router.post('/',(req,res) =>{
-  //console.log(req);
-  res.send('From this endpoint you can add more cats')
-  });
+router.get('/:userId', userController.getUser);
+
+    router.post('/', userController.createUser);
   
   router.put('/', (req, res) => {
     res.send('From this endpoint you can put users.');
@@ -19,5 +17,6 @@ router.get('/:catId', catController.getCat);
   router.delete('/', (req, res) => {
     res.send('From this endpoint you can delete users.');
   });
-  
+
+
 module.exports = router;
