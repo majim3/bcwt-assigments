@@ -1,6 +1,7 @@
 'use strict';
 const catModel = require('../models/catModel');
 
+
 const getCats = async(req, res) => {
     const cats = await catModel.getAllCats();
     res.json(cats)
@@ -8,6 +9,7 @@ const getCats = async(req, res) => {
 
 const getCat = async (req,res) =>{
     const cat = catModel.getCatById(req.params.catId)
+    console.log(req.params.catId)
     if(cat){
         res.json(cat);
 
