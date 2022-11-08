@@ -1,38 +1,30 @@
 'use strict';
-const userModel = require('../models/userModel')
-const users = userModel.users
+const userModel = require('../models/userModel');
 
-const getUsers = (req, res) => {
 
-    //removes password from the users that no one else can see them
-
-    users.map(user => {
-        delete user.password;
-        return user;
-    });
+const getUsers = async (req, res) => {
+    const users = await userModel.getAllUsers();
     res.json(users)
 }
 
-const getUser = (req,res) =>{
-    //matches the user
-    const user = users.filter(user => req.params.userId == user.id)[0];
-    if(user){
-        delete user.password
+const getuser = async (req, res) => {
+    const user = await userModel.getUserById(res, req.params.userId)
+    console.log(req.params.userId)
+    if (user) {
         res.json(user);
 
-    }else{
+    } else {
         res.sendStatus(404);
     }
-    };
-  
-const modifyUser = (req,res) => {}
-const createUser = (req,res) => {
-    console.log(req.body)
+};
 
-    const message = `username: ${req.body.name}, email: ${req.body.email}`
-    res.send('adding new user' + message)
-}
-const deleteUser = (req,res) => {}
+const modifyUser = (req, res) => { }
+const createUser = (req, res) => {
+    console.log(req.body);
+    res.send('adding user')
+};
+const deleteUser = (req, res) => { }
+
 
 module.exports = {
     getUsers,
