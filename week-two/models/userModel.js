@@ -26,7 +26,7 @@ const getUserById = async (id, res) => {
 const addUser = async (user, res) => {
   try {
     const sql = 'INSERT INTO wop_user VALUES (null, ?, ?, ?, ?)';
-    const values = [user.name, user.email, user.password, user.role];
+    const values = [user.name, user.email, user.passwd, user.role];
     const [result] = await promisePool.query(sql, values);
     return result.insertId;
   } catch (e) {
@@ -35,22 +35,8 @@ const addUser = async (user, res) => {
   }
 };
 
-const deleteUserById = async (userId, res) => {
-  try {
-    // TODO: do the LEFT (or INNER) JOIN to get owner's name as ownername (from wop_user table).
-    const [rows] = 
-      await promisePool.query("DELETE FROM wop_user WHERE user_id = ?", [userId]);
-    return rows;
-  } catch (e) {
-    console.error("error", e.message);
-    res.status(500).send(e.message);
-    
-  }
-}
-
 module.exports = {
   getAllUsers,
   getUserById,
-  addUser,
-  deleteUserById
+  addUser
 };
