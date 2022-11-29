@@ -43,6 +43,11 @@ const modifyUser = (req, res) => {
 const deleteUser = (req, res) => {
   // TODO: add functionality & data model
 };
+const checkToken = (req, res) => {
+  delete req.user.password;
+  res.json({user: req.user});
+};
+
 
 module.exports = {
   getUser,
@@ -50,4 +55,5 @@ module.exports = {
   modifyUser,
   createUser,
   deleteUser,
-};
+  checkToken,
+}
